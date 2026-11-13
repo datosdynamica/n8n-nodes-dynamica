@@ -1,7 +1,7 @@
 {
 	"name": "n8n-nodes-dynamica",
-	"version": "0.1.1",
-	"description": "Nodo comunitario de n8n para integrar DYNAMICA ERP con la API fiscal de Uruguay.",
+	"version": "0.1.2",
+	"description": "n8n community node for integrating DYNAMICA ERP with Uruguay's fiscal API.",
 	"license": "MIT",
 	"homepage": "https://github.com/datosdynamica/n8n-nodes-dynamica#readme",
 	"keywords": [

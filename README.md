@@ -1,57 +1,64 @@
 # n8n-nodes-dynamica
 
-Nodo comunitario de n8n para integrar **DYNAMICA ERP** con la API fiscal de Uruguay.
+n8n community node for integrating **DYNAMICA ERP** with Uruguay's fiscal API.
 
-## Funciones iniciales
+## Operations
 
-- Emitir un CFE mediante `POST /v1/documents/emissions`.
-- Consultar una emisión mediante `GET /v1/documents/emissions/:emissionId`.
-- Consultar documentos recibidos mediante `GET /v1/received-documents`.
+- Emit a CFE with `POST /v1/documents/emissions`.
+- Get an emission with `GET /v1/documents/emissions/:emissionId`.
+- Get received documents with `GET /v1/received-documents`.
 
-## Instalación
+## Installation
 
-En una instancia de n8n que permita nodos comunitarios:
+On an n8n instance that allows community nodes:
 
-1. Abra **Settings → Community nodes**.
-2. Seleccione **Install**.
-3. Escriba `n8n-nodes-dynamica`.
-4. Confirme la instalación y reinicie n8n si la instancia lo solicita.
+1. Open **Settings → Community nodes**.
+2. Select **Install**.
+3. Enter `n8n-nodes-dynamica`.
+4. Confirm the installation and restart n8n if the instance requests it.
 
-El paquete todavía no está publicado. Estas instrucciones serán válidas después de publicar la primera versión en npm.
+## Credentials
 
-## Credenciales
+Create a **DYNAMICA API** credential with:
 
-Cree una credencial **DYNAMICA API** con:
+- **Base URL:** the DYNAMICA fiscal API URL assigned to your environment.
+- **Access Token:** the company's Bearer token.
 
-- **Base URL:** URL de la API fiscal de DYNAMICA asignada a su ambiente.
-- **Access Token:** token Bearer de la empresa.
+Each company must use its own credentials. Never reuse tokens across customers or copy values from examples or screenshots.
 
-Cada empresa debe usar sus propias credenciales. No reutilice tokens entre clientes ni copie valores de ejemplos o capturas.
-
-## Operaciones
+## Usage
 
 ### Emit CFE
 
-Recibe el objeto JSON completo definido por el contrato de emisión de DYNAMICA. La emisión es una operación fiscal con efectos reales cuando se utiliza un ambiente productivo.
+Provide the complete JSON object defined by the DYNAMICA emission contract. Emitting a document has real fiscal effects when a production environment is used.
 
-Use una clave de idempotencia única y verifique el estado devuelto antes de repetir una solicitud.
+Use a unique idempotency key and verify the returned status before retrying a request.
 
 ### Get Emission
 
-Consulta una emisión mediante el `emissionId` recibido en la operación de emisión.
+Provide the `emissionId` returned by the emission operation to retrieve its status and artifacts.
 
 ### Get Received Documents
 
-Consulta documentos recibidos. Los filtros admitidos dependen del contrato vigente de la API, por ejemplo tipo documental, serie, rango de fechas y estado de respuesta.
+Provide optional filters as a JSON object. Supported filters depend on the current API contract and can include document type, series, date range, and response status.
 
-## Seguridad
+## Example workflow
 
-- Utilice primero un ambiente de pruebas autorizado.
-- No guarde tokens en workflows exportados, documentación o capturas.
-- Una respuesta HTTP exitosa no sustituye la verificación del estado fiscal del documento.
-- No repita una emisión incierta sin consultar antes su estado.
+1. Add the **DYNAMICA** node to a workflow.
+2. Select **Emit CFE**.
+3. Choose a **DYNAMICA API** credential configured for an authorized test environment.
+4. Enter a CFE payload that complies with your DYNAMICA API contract.
+5. Execute the node and store the returned `emissionId`.
+6. Use **Get Emission** to confirm the final fiscal status before retrying or continuing the workflow.
 
-## Desarrollo
+## Security
+
+- Start with an authorized test environment.
+- Never store tokens in exported workflows, documentation, or screenshots.
+- A successful HTTP response does not replace verification of the document's fiscal status.
+- Do not retry an uncertain emission before checking its status.
+
+## Development
 
 ```bash
 npm install
@@ -59,6 +66,6 @@ npm run lint
 npm run build
 ```
 
-## Licencia
+## License
 
 [MIT](LICENSE.md)

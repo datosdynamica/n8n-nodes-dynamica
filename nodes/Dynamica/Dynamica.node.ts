@@ -17,7 +17,7 @@ export class Dynamica implements INodeType {
 		group: ['output'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
-		description: 'Integra DYNAMICA ERP con la API fiscal de Uruguay',
+		description: "Integrates DYNAMICA ERP with Uruguay's fiscal API",
 		defaults: {
 			name: 'DYNAMICA',
 		},
@@ -40,19 +40,19 @@ export class Dynamica implements INodeType {
 					{
 						name: 'Emit CFE',
 						value: 'emitCfe',
-						description: 'Envía un documento fiscal electrónico para su emisión',
+						description: 'Sends an electronic fiscal document for issuance',
 						action: 'Emit a CFE',
 					},
 					{
 						name: 'Get Emission',
 						value: 'getEmission',
-						description: 'Consulta el estado y los artefactos de una emisión',
+						description: 'Gets the status and artifacts of an emission',
 						action: 'Get an emission',
 					},
 					{
 						name: 'Get Received Documents',
 						value: 'getReceivedDocuments',
-						description: 'Consulta documentos fiscales recibidos',
+						description: 'Gets received fiscal documents',
 						action: 'Get received documents',
 					},
 				],
@@ -64,7 +64,7 @@ export class Dynamica implements INodeType {
 				type: 'json',
 				displayOptions: { show: { operation: ['emitCfe'] } },
 				default: '{}',
-				description: 'Objeto JSON completo conforme al contrato de emisión de DYNAMICA',
+				description: 'Complete JSON object defined by the DYNAMICA emission contract',
 				required: true,
 			},
 			{
@@ -74,7 +74,7 @@ export class Dynamica implements INodeType {
 				displayOptions: { show: { operation: ['getEmission'] } },
 				default: '',
 				required: true,
-				description: 'Identificador devuelto al emitir el CFE',
+				description: 'Identifier returned when the CFE is emitted',
 			},
 			{
 				displayName: 'Filters',
@@ -82,7 +82,7 @@ export class Dynamica implements INodeType {
 				type: 'json',
 				displayOptions: { show: { operation: ['getReceivedDocuments'] } },
 				default: '{}',
-				description: 'Filtros opcionales enviados como parámetros de consulta',
+				description: 'Optional filters sent as query parameters',
 				required: true,
 			},
 		],
@@ -103,7 +103,7 @@ export class Dynamica implements INodeType {
 					} catch (error) {
 						throw new NodeOperationError(
 							this.getNode(),
-							`${fieldName} debe contener JSON válido: ${(error as Error).message}`,
+							`${fieldName} must contain valid JSON: ${(error as Error).message}`,
 							{ itemIndex },
 						);
 					}
@@ -111,7 +111,7 @@ export class Dynamica implements INodeType {
 					if (parsed === null || Array.isArray(parsed) || typeof parsed !== 'object') {
 						throw new NodeOperationError(
 							this.getNode(),
-							`${fieldName} debe ser un objeto JSON`,
+							`${fieldName} must be a JSON object`,
 							{ itemIndex },
 						);
 					}
@@ -144,7 +144,7 @@ export class Dynamica implements INodeType {
 				} else {
 					throw new NodeOperationError(
 						this.getNode(),
-						`Operación no soportada: ${operation}`,
+						`Unsupported operation: ${operation}`,
 						{ itemIndex },
 					);
 				}

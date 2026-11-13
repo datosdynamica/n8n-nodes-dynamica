@@ -25,7 +25,7 @@ export class DynamicaApi implements ICredentialType {
 			type: 'string',
 			default: 'https://www.datosdynamica.net/fiscal/api',
 			placeholder: 'https://www.datosdynamica.net/fiscal/api',
-			description: 'URL base de la API fiscal de DYNAMICA, sin barra final',
+			description: 'Base URL of the DYNAMICA fiscal API, without a trailing slash',
 		},
 		{
 			displayName: 'Access Token',
@@ -33,7 +33,7 @@ export class DynamicaApi implements ICredentialType {
 			type: 'string',
 			typeOptions: { password: true },
 			default: '',
-			description: 'Token Bearer asignado a la empresa en DYNAMICA',
+			description: 'Bearer token assigned to the company in DYNAMICA',
 		},
 	];
 
