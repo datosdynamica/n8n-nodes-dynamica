@@ -21,6 +21,9 @@
 		"type": "git",
 		"url": "https://github.com/datosdynamica/n8n-nodes-dynamica.git"
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"build": "n8n-node build",
 		"dev": "n8n-node dev",
